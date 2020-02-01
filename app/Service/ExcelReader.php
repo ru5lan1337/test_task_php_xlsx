@@ -7,7 +7,6 @@ namespace App\Service;
 class ExcelReader
 {
     private $xlsx;
-    private $errorXlsx = false;
 
     public function __construct($fileXlsx, $countSheetValidator = false)
     {
@@ -25,11 +24,6 @@ class ExcelReader
         } else {
             throw new \Exception('filetype error.');
         }
-    }
-
-    public function getError()
-    {
-        return $this->errorXlsx;
     }
 
     public function reader($arr, $numSheet)
