@@ -18,7 +18,7 @@ class ExcelReader
                 throw new \Exception('count sheet error.');
             }
             $nameSheets = $this->xlsx->getSheetNames();
-            if($countSheetValidator && $nameSheets != $countSheetValidator){
+            if ($countSheetValidator && $nameSheets != $countSheetValidator) {
                 throw new \Exception('Naming sheet error.');
             }
         } else {
@@ -37,13 +37,15 @@ class ExcelReader
                 if (empty($cell)) {
                     throw new \Exception((chr($ordCount) . $iRow) . ' - empty, sheet - ' . $numSheet);
                 } else {
-                    $resultValue[$value] = $cell;
+                    $res[$value] = $cell;
                     $ordCount++;
                 }
+                if($value == end($arr)){
+                    yield $res;
+                    $res = [];
+                }
             }
-            $result[] = $resultValue;
         }
-        return $result;
     }
 
 
