@@ -18,6 +18,10 @@ class ExcelReader
             if ($countSheetValidator && $this->xlsx->getSheetCount() != $countSheetValidator) {
                 throw new \Exception('count sheet error.');
             }
+            $nameSheets = $this->xlsx->getSheetNames();
+            if($nameSheets[0] != 'first' || $nameSheets[1] != 'second'){
+                throw new \Exception('Naming sheet error.');
+            }
         } else {
             throw new \Exception('filetype error.');
         }
