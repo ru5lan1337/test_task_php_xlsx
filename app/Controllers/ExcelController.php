@@ -29,8 +29,7 @@ class ExcelController extends Controller
 
         //get users
         try {
-            $dataUsersFromExcel = $excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet());
-            foreach ($dataUsersFromExcel as $dataUser) {
+            foreach ($excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet()) as $dataUser) {
                 $users[] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
             }
         } catch (\Exception $e) {
@@ -40,8 +39,7 @@ class ExcelController extends Controller
 
         //get transaction
         try {
-            $dataTransactionsFromExcel = $excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet());
-            foreach ($dataTransactionsFromExcel as $key => $dataTransactionFromExcel) {
+            foreach ($excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet()) as $key => $dataTransactionFromExcel) {
                 $transaction = new Transaction($dataTransactionFromExcel['id'], $dataTransactionFromExcel['sum']);
                 foreach ($users as $user) {
                     if ($user->getId() == $transaction->getId()) {
