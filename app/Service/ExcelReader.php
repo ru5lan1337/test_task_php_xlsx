@@ -15,11 +15,11 @@ class ExcelReader
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
         if ($reader->canRead($fileXlsx)) {
             $this->xlsx = $reader->load($fileXlsx);
-            if ($countSheetValidator && $this->xlsx->getSheetCount() != $countSheetValidator) {
+            if ($countSheetValidator && $this->xlsx->getSheetCount() != count($countSheetValidator)) {
                 throw new \Exception('count sheet error.');
             }
             $nameSheets = $this->xlsx->getSheetNames();
-            if($nameSheets[0] != 'first' || $nameSheets[1] != 'second'){
+            if($countSheetValidator && $nameSheets != $countSheetValidator){
                 throw new \Exception('Naming sheet error.');
             }
         } else {
