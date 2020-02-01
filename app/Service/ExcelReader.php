@@ -16,10 +16,10 @@ class ExcelReader
         if ($reader->canRead($fileXlsx)) {
             $this->xlsx = $reader->load($fileXlsx);
             if ($countSheetValidator && $this->xlsx->getSheetCount() != $countSheetValidator) {
-                throw new Exception('count sheet error.');
+                throw new \Exception('count sheet error.');
             }
         } else {
-            throw new Exception('filetype error.');
+            throw new \Exception('filetype error.');
         }
     }
 
@@ -37,7 +37,7 @@ class ExcelReader
             foreach ($arr as $value) {
                 $cell = $oCells->get(chr($ordCount++) . $iRow)->getValue();
                 if (empty($cell)) {
-                    throw new Exception((chr($ordCount) . $iRow) . ' - empty, sheet - ' . $numSheet);
+                    throw new \Exception((chr($ordCount) . $iRow) . ' - empty, sheet - ' . $numSheet);
                 } else {
                     $resultValue[$value] = $cell;
                 }

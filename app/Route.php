@@ -7,7 +7,8 @@ class Route
     public static function rules()
     {
         return [
-            '/' => 'MainController@index'
+            '/' => 'ExcelController@index',
+            '/upload' => 'ExcelController@upload',
         ];
     }
 }
