@@ -35,11 +35,12 @@ class ExcelReader
         for ($iRow = 1; $iRow <= $oCells->getHighestRow(); $iRow++) {
             $ordCount = 65; //ord('A') = 65
             foreach ($arr as $value) {
-                $cell = $oCells->get(chr($ordCount++) . $iRow)->getValue();
+                $cell = $oCells->get(chr($ordCount) . $iRow)->getValue();
                 if (empty($cell)) {
                     throw new \Exception((chr($ordCount) . $iRow) . ' - empty, sheet - ' . $numSheet);
                 } else {
                     $resultValue[$value] = $cell;
+                    $ordCount++;
                 }
             }
             $result[] = $resultValue;
