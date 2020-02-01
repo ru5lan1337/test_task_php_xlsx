@@ -19,7 +19,10 @@ class ExcelController extends Controller
     {
         //load
         try {
-            $excelReader = new ExcelReader($this->request->files['excel']['tmp_name'], 2);
+            $excelReader = new ExcelReader($this->request->files['excel']['tmp_name'], [
+                0 => 'first',
+                1 => 'second'
+            ]);
         } catch (\Exception $e) {
             return $this->excelError($e->getMessage());
         }
