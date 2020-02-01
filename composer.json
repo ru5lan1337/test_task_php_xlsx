@@ -1,0 +1,13 @@
+{
+    "name": "ruslan/test",
+    "description": "test task",
+    "type": "project",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.10"
+    },
+    "autoload": {
+    "psr-4": {
+      "App\\": "app"
+    }
+  }
+}
