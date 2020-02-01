@@ -39,7 +39,7 @@ class ExcelController extends Controller
 
         //get transaction
         try {
-            foreach ($excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet()) as $key => $dataTransactionFromExcel) {
+            foreach ($excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet()) as $dataTransactionFromExcel) {
                 $transaction = new Transaction($dataTransactionFromExcel['id'], $dataTransactionFromExcel['sum']);
                 foreach ($users as $user) {
                     if ($user->getId() == $transaction->getId()) {
