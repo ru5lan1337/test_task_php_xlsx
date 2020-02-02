@@ -23,7 +23,7 @@ class ExcelController extends Controller
                 0 => 'first',
                 1 => 'second'
             ]);
-            
+
             //get users
             foreach ($excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet()) as $dataUser) {
                 $users[] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
@@ -57,14 +57,9 @@ class ExcelController extends Controller
             }
 
         } catch (\Exception $e) {
-            return $this->excelError($e->getMessage());
+            return $this->response->render('excel.error', $e->getMessage());
         }
         return $this->response->render('excel.result', $usersResult);
-    }
-
-    private function excelError($error)
-    {
-        return $this->response->render('excel.error', $error);
     }
 
 }
