@@ -23,22 +23,13 @@ class ExcelController extends Controller
                 0 => 'first',
                 1 => 'second'
             ]);
-        } catch (\Exception $e) {
-            return $this->excelError($e->getMessage());
-        }
-
-        //get users
-        try {
+            
+            //get users
             foreach ($excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet()) as $dataUser) {
                 $users[] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
             }
-        } catch (\Exception $e) {
-            return $this->excelError($e->getMessage());
-        }
 
-
-        //get transaction
-        try {
+            //get transaction
             foreach ($excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet()) as $dataTransactionFromExcel) {
                 $transaction = new Transaction($dataTransactionFromExcel['id'], $dataTransactionFromExcel['sum']);
                 foreach ($users as $user) {
@@ -55,18 +46,19 @@ class ExcelController extends Controller
             if (isset($transactionIdsNotFound)) {
                 return $this->excelError('id - ' . Helper::getStrByKeyArray($transactionIdsNotFound) . 'transaction not found user');
             }
+
+
+            //calculate
+            foreach ($users as $user) {
+                $user->calculateBalance();
+                $userResult['fullName'] = $user->getFullName();
+                $userResult['balance'] = $user->getBalance();
+                $usersResult[] = $userResult;
+            }
+
         } catch (\Exception $e) {
             return $this->excelError($e->getMessage());
         }
-
-        //calculate
-        foreach ($users as $user) {
-            $user->calculateBalance();
-            $userResult['fullName'] = $user->getFullName();
-            $userResult['balance'] = $user->getBalance();
-            $usersResult[] = $userResult;
-        }
-
         return $this->response->render('excel.result', $usersResult);
     }
 
