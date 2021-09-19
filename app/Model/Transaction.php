@@ -6,7 +6,7 @@ namespace App\Model;
 
 class Transaction
 {
-    private $id;
+    private $userId;
     private $sum;
     private static $excelNaming = ['id', 'sum'];
     private static $excelNumSheet = 1;
@@ -19,7 +19,7 @@ class Transaction
 
     public function getUserId()
     {
-        return $this->id;
+        return $this->userId;
     }
 
     public function getSum()
