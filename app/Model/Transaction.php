@@ -13,11 +13,11 @@ class Transaction
 
     public function __construct($id, $sum)
     {
-        $this->id = $id;
+        $this->userId = $id;
         $this->sum = $sum;
     }
 
-    public function getId()
+    public function getUserId()
     {
         return $this->id;
     }
