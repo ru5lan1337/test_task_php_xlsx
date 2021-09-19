@@ -25,29 +25,25 @@ class ExcelController extends Controller
             ]);
 
             //get users
-            foreach ($excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet()) as $dataUser) {
-                $users[] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
+            $dataUsers = $excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet()) as $dataUser;
+            foreach ($dataUsers as $dataUser) {
+                $users[$dataUser['id']] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
             }
 
             //get transaction
-            foreach ($excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet()) as $dataTransactionFromExcel) {
+            $dataTransactions = $excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet());
+            foreach ($dataTransactions as $dataTransactionFromExcel) {
                 $transaction = new Transaction($dataTransactionFromExcel['id'], $dataTransactionFromExcel['sum']);
-                foreach ($users as $user) {
-                    if ($user->getId() == $transaction->getId()) {
-                        $user->addTransaction($transaction);
-                        $transaction = false;
-                        break;
-                    }
-                }
-                if ($transaction) {
-                    $transactionIdsNotFound[$transaction->getId()] = true;
+                if(isset($users[$transaction->getId()])){
+                    $users[$transaction->getId()]->addTransaction($transaction);
+                } else{
+                    $transactionIdsNotFound[] = $transaction->getId();
                 }
             }
             if (isset($transactionIdsNotFound)) {
-                return $this->excelError('id - ' . Helper::getStrByKeyArray($transactionIdsNotFound) . 'transaction not found user');
+                return $this->excelError('id - ' . Helper::getStrArray($transactionIdsNotFound) . 'transaction not found user');
             }
-
-
+            
             //calculate
             foreach ($users as $user) {
                 $user->calculateBalance();

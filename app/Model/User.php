@@ -23,10 +23,8 @@ class User
     public function calculateBalance()
     {
         $this->balance = $this->startBalance;
-        if (is_array($this->transactions)) {
-            foreach ($this->transactions as $transaction) {
-                $this->balance += $transaction->getSum();
-            }
+        foreach ($this->transactions as $transaction) {
+            $this->balance += $transaction->getSum();
         }
     }
 
