@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Service\ExcelReader;
-use App\Service\Helper;
 use App\Model\User;
 use App\Model\Transaction;
 
@@ -41,7 +40,7 @@ class ExcelController extends Controller
                 }
             }
             if (isset($transactionIdsNotFound)) {
-                return $this->excelError('id - ' . Helper::getStrArray($transactionIdsNotFound) . 'transaction not found user');
+                return $this->excelError('id - ' . implode($transactionIdsNotFound) . 'transaction not found user');
             }
             
             //calculate
