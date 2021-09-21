@@ -24,7 +24,7 @@ class ExcelController extends Controller
             ]);
 
             //get users
-            $dataUsers = $excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet()) as $dataUser;
+            $dataUsers = $excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet());
             foreach ($dataUsers as $dataUser) {
                 $users[$dataUser['id']] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
             }
