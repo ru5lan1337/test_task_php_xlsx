@@ -46,7 +46,7 @@ class ExcelReader
                 if($value == end($arr)){
                     $obj = new $model();
                     foreach ($arr as $prop){
-                        $obj[$prop] = $res[$prop];
+                        $obj->$prop = $res[$prop];
                     }
                     yield $obj;
                     $res = [];

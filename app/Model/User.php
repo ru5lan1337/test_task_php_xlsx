@@ -5,11 +5,11 @@ namespace App\Model;
 
 class User
 {
-    private $id;
-    private $fullName;
-    private $startBalance;
-    private $balance;
-    private $transactions;
+    public $id;
+    public $fullName;
+    public $startBalance;
+    public $balance;
+    public $transactions;
     private static $excelNaming = ['id', 'fullName', 'startBalance'];
     private static $excelNumSheet = 0;
 

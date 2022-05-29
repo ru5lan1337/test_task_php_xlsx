@@ -6,8 +6,8 @@ namespace App\Model;
 
 class Transaction
 {
-    private $userId;
-    private $sum;
+    public $userId;
+    public $sum;
     private static $excelNaming = ['userId', 'sum'];
     private static $excelNumSheet = 1;
 
