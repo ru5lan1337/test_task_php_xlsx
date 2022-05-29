@@ -26,8 +26,10 @@ class ExcelReader
         }
     }
 
-    public function reader($arr, $numSheet)
+    public function read($model)
     {
+        $numSheet = $model::getExcelNumSheet();
+        $arr = $model::getExcelNaming();
         $this->xlsx->setActiveSheetIndex($numSheet);
         $oCells = $this->xlsx->getActiveSheet()->getCellCollection();
         for ($iRow = 1; $iRow <= $oCells->getHighestRow(); $iRow++) {
@@ -42,7 +44,11 @@ class ExcelReader
                     $ordCount++;
                 }
                 if($value == end($arr)){
-                    yield $res;
+                    $obj = new $model();
+                    foreach ($arr as $prop){
+                        $obj[$prop] = $res[$prop];
+                    }
+                    yield $obj;
                     $res = [];
                 }
             }

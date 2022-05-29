@@ -24,15 +24,14 @@ class ExcelController extends Controller
             ]);
 
             //get users
-            $dataUsers = $excelReader->reader(User::getExcelNaming(), User::getExcelNumSheet());
-            foreach ($dataUsers as $dataUser) {
-                $users[$dataUser['id']] = new User($dataUser['id'], $dataUser['fullName'], $dataUser['startBalance']);
+            $dataUsers = $excelReader->read(User);
+            foreach ($dataUsers as $user) {
+                $users[$user->getId()] = $user;
             }
 
             //get transaction
-            $dataTransactions = $excelReader->reader(Transaction::getExcelNaming(), Transaction::getExcelNumSheet());
-            foreach ($dataTransactions as $dataTransactionFromExcel) {
-                $transaction = new Transaction($dataTransactionFromExcel['id'], $dataTransactionFromExcel['sum']);
+            $dataTransactions = $excelReader->read(Transaction);
+            foreach ($dataTransactions as $transaction) {
                 if(isset($users[$transaction->getUserId()])){
                     $users[$transaction->getUserId()]->addTransaction($transaction);
                 } else{

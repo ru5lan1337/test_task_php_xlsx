@@ -13,11 +13,8 @@ class User
     private static $excelNaming = ['id', 'fullName', 'startBalance'];
     private static $excelNumSheet = 0;
 
-    public function __construct($id, $fullName, $startBalance)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->fullName = $fullName;
-        $this->startBalance = $startBalance;
     }
 
     public function calculateBalance()

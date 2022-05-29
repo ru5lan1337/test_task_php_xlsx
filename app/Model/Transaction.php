@@ -8,13 +8,11 @@ class Transaction
 {
     private $userId;
     private $sum;
-    private static $excelNaming = ['id', 'sum'];
+    private static $excelNaming = ['userId', 'sum'];
     private static $excelNumSheet = 1;
 
-    public function __construct($id, $sum)
+    public function __construct()
     {
-        $this->userId = $id;
-        $this->sum = $sum;
     }
 
     public function getUserId()
