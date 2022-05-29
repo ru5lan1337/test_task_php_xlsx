@@ -24,13 +24,13 @@ class ExcelController extends Controller
             ]);
 
             //get users
-            $dataUsers = $excelReader->read(User);
+            $dataUsers = $excelReader->read(User::class);
             foreach ($dataUsers as $user) {
                 $users[$user->getId()] = $user;
             }
 
             //get transaction
-            $dataTransactions = $excelReader->read(Transaction);
+            $dataTransactions = $excelReader->read(Transaction::class);
             foreach ($dataTransactions as $transaction) {
                 if(isset($users[$transaction->getUserId()])){
                     $users[$transaction->getUserId()]->addTransaction($transaction);
