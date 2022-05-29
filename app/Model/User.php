@@ -13,11 +13,16 @@ class User
     private static $excelNaming = ['id', 'fullName', 'startBalance'];
     private static $excelNumSheet = 0;
 
+<<<<<<< HEAD
     public function __construct($id, $fullName, $startBalance)
     {
         $this->id = $id;
         $this->fullName = $fullName;
         $this->startBalance = $startBalance;
+=======
+    public function __construct()
+    {
+>>>>>>> refactor-by-24yo
     }
 
     public function calculateBalance()
@@ -57,4 +62,8 @@ class User
     {
         return self::$excelNumSheet;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refactor-by-24yo

@@ -8,6 +8,7 @@ class Transaction
 {
     private $userId;
     private $sum;
+<<<<<<< HEAD
     private static $excelNaming = ['id', 'sum'];
     private static $excelNumSheet = 1;
 
@@ -15,6 +16,13 @@ class Transaction
     {
         $this->userId = $id;
         $this->sum = $sum;
+=======
+    private static $excelNaming = ['userId', 'sum'];
+    private static $excelNumSheet = 1;
+
+    public function __construct()
+    {
+>>>>>>> refactor-by-24yo
     }
 
     public function getUserId()
@@ -36,4 +44,8 @@ class Transaction
     {
         return self::$excelNumSheet;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refactor-by-24yo
